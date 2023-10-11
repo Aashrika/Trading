@@ -1,4 +1,4 @@
-package com.assessment.trading;
+package com.assessment.trading.domain;
 
 /**
  * This is implemented in a third-party library and we cannot change it
