@@ -18,11 +18,10 @@ public class TradingService implements SignalHandler {
 
   @Override
   public void handleSignal(int signal) {
-    var signalWithStrategies = strategies.getSignalWithStrategies();
-    if (signalWithStrategies.containsKey(signal)) {
-      signalWithStrategies.get(signal).run();
-      log.info("Signal: {}" , signal +" is processed.");
-    } else {
+    try {
+      strategies.executeStrategy(signal, new Algo());
+      log.info("Signal: {} is processed.", signal);
+    } catch (IllegalArgumentException e) {
       log.warn("Unexpected Signal received.");
       defaultSignalStrategy.execute(new Algo());
     }
