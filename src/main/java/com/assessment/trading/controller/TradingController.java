@@ -16,10 +16,10 @@ public class TradingController {
 
   private final SignalHandler singleHandler;
 
-  @PostMapping(value = "/trading", produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value = "/trade", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<String> executeSignalStrategy(@RequestParam int signal) {
     singleHandler.handleSignal(signal);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok().body("Trading signal :"+ signal + " executed.");
   }
 
 }
