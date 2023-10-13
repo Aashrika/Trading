@@ -1,46 +1,48 @@
 package com.assessment.trading.service;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.assessment.trading.domain.Algo;
 import com.assessment.trading.domain.Strategies;
 import com.assessment.trading.domain.strategies.DefaultSignalStrategy;
-import java.util.Map;
+import com.assessment.trading.domain.strategies.Signal1Strategy;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class TradingServiceTest {
 
-  @Mock
-  private Strategies strategies;
+  @Spy
+  private Signal1Strategy signal1Strategy;
 
   @Mock
   private DefaultSignalStrategy defaultSignalStrategy;
 
   private TradingService tradingService;
+
   @BeforeEach
   void setUp() {
-  tradingService = new TradingService(strategies,defaultSignalStrategy);
+    Strategies strategies = new Strategies(List.of(signal1Strategy));
+    tradingService = new TradingService(strategies, defaultSignalStrategy);
   }
 
   @Test
   public void shouldHandleValidSignal() {
-    //Arrange
-    int validSignal = 123;
-    Runnable mockRunnable = Mockito.mock(Runnable.class);
-    when(strategies.getSignalWithStrategies()).thenReturn(Map.of(validSignal, mockRunnable));
-
+    // Arrange
+    int validSignal = 1;
     // Act
     tradingService.handleSignal(validSignal);
 
     // Assert
-    verify(mockRunnable).run();
+    verify(signal1Strategy).execute(any(Algo.class));
+
   }
 
   @Test
@@ -48,13 +50,12 @@ public class TradingServiceTest {
     // Arrange
     int unexpectedSignal = 456;
 
-    when(strategies.getSignalWithStrategies()).thenReturn(Map.of());
-
     // Act
     tradingService.handleSignal(unexpectedSignal);
 
     // Assert
-    verify(defaultSignalStrategy).execute(Mockito.any(Algo.class));
+    verify(signal1Strategy, atLeast(0)).execute(any(Algo.class));
+    verify(defaultSignalStrategy).execute(any(Algo.class));
   }
 
 }
