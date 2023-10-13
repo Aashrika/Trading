@@ -1,7 +1,6 @@
-package com.assessment.trading.service;
+package com.assessment.trading.domain;
 
-import com.assessment.trading.domain.Algo;
-import com.assessment.trading.domain.SignalHandler;
+import com.assessment.trading.service.SignalHandler;
 
 @Deprecated
 class Application implements SignalHandler {

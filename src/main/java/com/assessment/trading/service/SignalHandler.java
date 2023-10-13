@@ -1,4 +1,4 @@
-package com.assessment.trading.domain;
+package com.assessment.trading.service;
 
 /**
  * This is an upcall from our trading system, and we cannot change it.

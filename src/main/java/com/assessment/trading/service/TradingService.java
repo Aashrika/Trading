@@ -1,7 +1,6 @@
 package com.assessment.trading.service;
 
 import com.assessment.trading.domain.Algo;
-import com.assessment.trading.domain.SignalHandler;
 import com.assessment.trading.domain.Strategies;
 import com.assessment.trading.domain.strategies.DefaultSignalStrategy;
 import lombok.RequiredArgsConstructor;

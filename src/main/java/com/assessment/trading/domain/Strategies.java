@@ -1,5 +1,6 @@
 package com.assessment.trading.domain;
 
+import com.assessment.trading.domain.strategies.Strategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

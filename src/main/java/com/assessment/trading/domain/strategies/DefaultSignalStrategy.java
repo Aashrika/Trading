@@ -1,7 +1,6 @@
 package com.assessment.trading.domain.strategies;
 
 import com.assessment.trading.domain.Algo;
-import com.assessment.trading.domain.Strategy;
 import org.springframework.stereotype.Service;
 
 @Service

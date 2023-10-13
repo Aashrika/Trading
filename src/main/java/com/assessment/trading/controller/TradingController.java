@@ -1,6 +1,6 @@
 package com.assessment.trading.controller;
 
-import com.assessment.trading.domain.SignalHandler;
+import com.assessment.trading.service.SignalHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
